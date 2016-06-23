@@ -1,0 +1,13 @@
+extends layout
+block Contenido
+	table(class="table")
+		tr 
+			th Nombre
+			th Edad
+			th Dirección
+		each Usuario in usuarios
+			tr
+				td
+					a(href="/consulta/usuario/"+Usuario.nombre+"/"+Usuario.edad)=Usuario.nombre
+				td=Usuario.edad 
+				td=Usuario.direccion
