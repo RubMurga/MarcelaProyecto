@@ -2,6 +2,8 @@
 var express = require('express');
 var router = express.Router();
 var userModel = require("../Models/usuario");
+var edoModel = require("../Models/estados");
+var clubModel = require("../Models/club");
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express', Hola: 'Hola soy Marcela'});
@@ -12,9 +14,10 @@ router.get('/alta',function(req,res) {
 }); 
 router.post('/alta',function(req,res) {
 	var userData = {
+		idSocio:req.body.idSocio,
 		nombre:req.body.nombre,
-		edad:req.body.edad,
-		direccion:req.body.direccion
+		direccion:req.body.direccion,
+		tel:req.body.tel,
 	};
 	userModel.altaUsuario(userData,function(ERROR,resultado){
 		if(ERROR){
@@ -45,7 +48,39 @@ router.get('/consulta/usuario/:nombreUsuario/:usuarioEdad',function(req,res){
 });
 
 
-
+router.get('/club/:mensaje',function(req,res) { 
+	edoModel.consultaEdo(function(ERROR,resultado){
+		if(ERROR){
+			throw ERROR;
+		}else{
+			var mensaje;
+			if(req.params.mensaje=="alta"){
+				mensaje = "Dando de alta";
+			}else if(req.params.mensaje == "success"){
+				mensaje = "Club dado de alta";
+			}
+			res.render("altaClub",{estados: resultado,mensaje: mensaje});
+		}
+	});
+}); 
+router.post('/club',function(req,res) {
+	var userData = {
+		idClub:req.body.idClub,
+		nombre:req.body.nombre,
+		direccion:req.body.direccion,
+		tel:req.body.tel,
+		idEdo:req.body.idEdo,
+	};
+	console.log(userData);
+	clubModel.altaClub(userData,function(ERROR,resultado){
+		if(ERROR){
+			throw ERROR;
+		}else{
+			res.redirect("/club/success");
+			//res.render("altaClub",{mensaje: resultado});
+		}
+	});
+});
 
 
 

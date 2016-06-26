@@ -8,10 +8,10 @@ var connection = mysql.createConnection(
 	database : 'Proyecto'
 });
 
-var userModel = {};
+var userModel = {}; //Objeto
 userModel.altaUsuario = function(userData,callBack){ //Datos Usuario y regresar a donde llamo
 	if(connection){
-		connection.query("insert into usuario set ?",userData,function(ERROR,row){
+		connection.query("insert into socio set ?",userData,function(ERROR,row){
 			if(ERROR){
 				throw ERROR;
 			}else{
@@ -24,7 +24,7 @@ userModel.altaUsuario = function(userData,callBack){ //Datos Usuario y regresar 
 
 userModel.consultaUsuario = function(callBack){
 	if(connection){
-		connection.query("select * from usuario",function(ERROR,row){
+		connection.query("select * from socio",function(ERROR,row){
 			if(ERROR){
 				throw ERROR;
 			}else{
@@ -38,7 +38,7 @@ userModel.consultaUsuario = function(callBack){
 
 userModel.consultaPersonal = function(userName,callBack){
 	if(connection){
-		connection.query("select * from usuario where nombre="+connection.escape(userName),function(ERROR,row){
+		connection.query("select * from socio where nombre="+connection.escape(userName),function(ERROR,row){
 			if(ERROR){
 				throw ERROR;
 			}else{
@@ -48,6 +48,10 @@ userModel.consultaPersonal = function(userName,callBack){
 		});
 	}
 }
+
+
+
+
 
 
 module.exports = userModel; 

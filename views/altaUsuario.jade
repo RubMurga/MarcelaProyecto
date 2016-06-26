@@ -2,13 +2,16 @@ extends layout
 block Contenido
 	div
 		form(action="/alta" method="post")
+			label(for="fidSocio") idSocio
+			input(type="text" id="idSocio" name="idSocio")
+			br
 			label(for="fname") Nombre
 			input(type="text" id="nombre" name="nombre")
 			br
-			label(for="fedad") Edad
-			input(type="text" id="edad" name="edad")
-			br
 			label(for="direccion") Direccion
 			input(type="text" id="direccion" name="direccion")
+			br
+			label(for="ftel") Telefono
+			input(type="text" id="tel" name="tel")
 			br
 			input(type="submit" value="Submit")
