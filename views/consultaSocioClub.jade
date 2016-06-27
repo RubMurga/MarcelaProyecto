@@ -1,0 +1,12 @@
+extends layout
+block Contenido
+	div(form-group)
+	select(multiple class="form-control" id="idClub" name="idClub" placeholder="idClub")
+		each club in clubs
+			option(value = club.idClub)=club.nombre
+	div(form-group)
+	select(multiple class="form-control" id="idSocio" name="idSocio" placeholder="idSocio")
+		each socio in socios
+			option(value = socio.idSocio)=socio.nombre
+	div(form-group)
+	input(type="submit" value="Enviar Selección")
